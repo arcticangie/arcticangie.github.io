@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Network Study</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    font-family:"Segoe UI",sans-serif;
+
+    background:#FFF9FB;
+
+    color:#37352F;
+
+    line-height:1.6;
+
+}
+
+.container{
+
+    width:90%;
+
+    max-width:900px;
+
+    margin:60px auto;
+
+}
+
+.header{
+
+    margin-bottom:45px;
+
+}
+
+.header h1{
+
+    font-size:42px;
+
+    font-weight:700;
+
+    color:#5F5559;
+
+}
+
+.header p{
+
+    margin-top:10px;
+
+    color:#8F8589;
+
+    font-size:17px;
+
+}
+
+.section{
+
+    margin-bottom:45px;
+
+}
+
+.section h2{
+
+    font-size:22px;
+
+    color:#82AE8A;
+
+    margin-bottom:18px;
+
+}
+
+.list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+
+}
+
+.item{
+
+    background:white;
+
+    border:1px solid #F2E6EB;
+
+    border-radius:14px;
+
+    padding:18px 22px;
+
+    text-decoration:none;
+
+    color:#37352F;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    transition:.2s;
+
+}
+
+.item:hover{
+
+    background:#FFF1F6;
+
+    border-color:#DDEFD9;
+
+    transform:translateX(6px);
+
+}
+
+.left{
+
+    display:flex;
+
+    gap:14px;
+
+    align-items:center;
+
+}
+
+.number{
+
+    width:34px;
+
+    height:34px;
+
+    border-radius:50%;
+
+    background:#FFE4EC;
+
+    color:#8B6875;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:14px;
+
+    font-weight:bold;
+
+}
+
+.title{
+
+    font-size:17px;
+
+}
+
+.arrow{
+
+    color:#9F9F9F;
+
+    font-size:20px;
+
+}
+
+.footer{
+
+    margin-top:60px;
+
+    text-align:center;
+
+    color:#A9A2A5;
+
+    font-size:14px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+
+<h1>👾 JUJUNOVA Network Study</h1>
+
+
+</div>
+
+<!-- Network Basics -->
+
+<div class="section">
+
+<h2>Network Basics</h2>
+
+<div class="list">
+
+<a class="item" href="osi.html">
+
+<div class="left">
+
+<div class="number">1</div>
+
+<div class="title">OSI 7계층</div>
+
+</div>
+
+<div class="arrow">→</div>
+
+</a>
+
+<a class="item" href="tcpip.html">
+
+<div class="left">
+
+<div class="number">2</div>
+
+<div class="title">TCP/IP 모델</div>
+
+</div>
+
+<div class="arrow">→</div>
+
+</a>
+
+<a class="item" href="ipv4.html">
+
+<div class="left">
+
+<div class="number">3</div>
+
+<div class="title">IPv4 / IPv6</div>
+
+</div>
+
+<div class="arrow">→</div>
+
+</a>
+
+<a class="item" href="subnet.html">
+
+<div class="left">
+
+<div class="number">4</div>
+
+<div class="title">Subnet</div>
+
+</div>
+
+<div class="arrow">→</div>
+
+</a>
+
+<a class="item" href="dns.html">
+
+<div class="left">
+
+<div class="number">5</div>
+
+<div class="title">DNS</div>
+
+</div>
+
+<div class="arrow">→</div>
+
+</a>
+
+<a class="item" href="gateway.html">
+
+<div class="left">
+
+<div class="number">6</div>
+
+<div class="title">Gateway & Routing</div>
+
+</div>
+
+<div class="arrow">→</div>
+
+</a>
+
+<a class="item" href="nat.html">
+
+<div class="left">
+
+<div class="number">7</div>
+
+<div class="title">NAT</div>
+
+</div>
+
+<div class="arrow">→</div>
+
+</a>
+
+<a class="item" href="tcp.html">
+
+<div class="left">
+
+<div class="number">8</div>
+
+<div class="title">TCP</div>
+
+</div>
+
+<div class="arrow">→</div>
+
+</a>
+
+<a class="item" href="port.html">
+
+<div class="left">
+
+<div class="number">9</div>
+
+<div class="title">Port</div>
+
+</div>
+
+<div class="arrow">→</div>
+
+</a>
+
+</div>
+
+</div>
+
+<!-- Network Devices -->
+
+<div class="section">
+
+<h2>Network Devices</h2>
+
+<div class="list">
+
+<a class="item" href="switch.html">
+
+<div class="left">
+
+<div class="number">10</div>
+
+<div class="title">Switch</div>
+
+</div>
+
+<div class="arrow">→</div>
+
+</a>
+
+<a class="item" href="router.html">
+
+<div class="left">
+
+<div class="number">11</div>
+
+<div class="title">Router</div>
+
+</div>
+
+<div class="arrow">→</div>
+
+</a>
+
+<a class="item" href="firewall.html">
+
+<div class="left">
+
+<div class="number">12</div>
+
+<div class="title">Firewall</div>
+
+</div>
+
+<div class="arrow">→</div>
+
+</a>
+
+<a class="item" href="vpn.html">
+
+<div class="left">
+
+<div class="number">13</div>
+
+<div class="title">VPN</div>
+
+</div>
+
+<div class="arrow">→</div>
+
+</a>
+
+</div>
+
+</div>
+
+<!-- Security -->
+
+<div class="section">
+
+<h2>Security</h2>
+
+<div class="list">
+
+<a class="item" href="http.html">
+
+<div class="left">
+
+<div class="number">14</div>
+
+<div class="title">HTTP / HTTPS</div>
+
+</div>
+
+<div class="arrow">→</div>
+
+</a>
+
+<a class="item" href="tls.html">
+
+<div class="left">
+
+<div class="number">15</div>
+
+<div class="title">TLS / SSL</div>
+
+</div>
+
+<div class="arrow">→</div>
+
+</a>
+
+<a class="item" href="packet.html">
+
+<div class="left">
+
+<div class="number">16</div>
+
+<div class="title">Packet</div>
+
+</div>
+
+<div class="arrow">→</div>
+
+</a>
+
+<a class="item" href="wireshark.html">
+
+<div class="left">
+
+<div class="number">17</div>
+
+<div class="title">Wireshark</div>
+
+</div>
+
+<div class="arrow">→</div>
+
+</a>
+
+<a class="item" href="attack.html">
+
+<div class="left">
+
+<div class="number">18</div>
+
+<div class="title">네트워크 공격</div>
+
+</div>
+
+<div class="arrow">→</div>
+
+</a>
+
+</div>
+
+</div>
+
+<div class="footer">
+
+JUJUNOVA
+
+</div>
+
+</div>
+
+</body>
+
+</html>
