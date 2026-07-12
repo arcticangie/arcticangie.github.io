@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>13. VPN</title>
+<style>
+body{margin:0;background:#F8FFF9;font-family:'Segoe UI',sans-serif;color:#333;line-height:1.8}
+.wrap{max-width:980px;margin:40px auto;padding:0 20px}
+.card{background:#fff;border-radius:18px;padding:34px;margin-bottom:24px;box-shadow:0 8px 24px rgba(0,0,0,.08)}
+h1{margin:0;color:#F08CB4;border-left:8px solid #BFEFD0;padding-left:14px}
+h2{color:#59A87B}
+.note{background:#FFF5F8;border-left:6px solid #F3ABC7;padding:16px;border-radius:10px}
+table{width:100%;border-collapse:collapse}
+th,td{border:1px solid #DCE9E0;padding:10px}
+th{background:#DFF8E8}
+.flow{background:#F5FFF7;border:1px dashed #8AC7A9;border-radius:10px;padding:16px;white-space:pre-line}
+.tip{background:#EEFDF3;border-radius:10px;padding:16px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="card">
+<h1>13. VPN (Virtual Private Network)</h1>
+<div class="note">
+VPN은 인터넷과 같은 공용 네트워크 위에서 암호화된 통신 터널을 만들어 안전하게 데이터를 주고받는 기술이다.
+외부에서도 회사 내부 네트워크에 안전하게 접속할 수 있기 때문에 재택근무, 지사 연결, 원격 관리 환경에서 많이 사용된다.
+</div>
+</div>
+
+<div class="card">
+<h2>왜 중요한가?</h2>
+<ul>
+<li>공용 네트워크에서도 안전하게 통신할 수 있다.</li>
+<li>원격 근무 환경에서 내부 시스템에 접근할 수 있다.</li>
+<li>데이터를 암호화하여 도청 위험을 줄인다.</li>
+<li>기업 인프라에서 자주 사용하는 보안 기술이다.</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>핵심 이론</h2>
+
+<table>
+<tr><th>종류</th><th>설명</th></tr>
+<tr><td>Site-to-Site VPN</td><td>본사와 지사처럼 네트워크와 네트워크를 연결한다.</td></tr>
+<tr><td>Remote Access VPN</td><td>사용자가 외부에서 회사 내부망에 접속한다.</td></tr>
+<tr><td>IPSec VPN</td><td>IP 계층에서 암호화하여 안전하게 통신한다.</td></tr>
+<tr><td>SSL VPN</td><td>웹 브라우저 또는 전용 클라이언트를 이용해 접속한다.</td></tr>
+</table>
+
+<br>
+
+<table>
+<tr><th>구분</th><th>IPSec VPN</th><th>SSL VPN</th></tr>
+<tr><td>동작 계층</td><td>Network Layer</td><td>Application Layer</td></tr>
+<tr><td>주요 용도</td><td>지사 간 연결</td><td>원격 사용자 접속</td></tr>
+<tr><td>특징</td><td>안정적인 터널 연결</td><td>사용이 간편</td></tr>
+</table>
+
+<p>
+VPN은 데이터를 암호화한 뒤 전송하기 때문에 중간에서 패킷을 가로채더라도 내용을 확인하기 어렵다.
+</p>
+</div>
+
+<div class="card">
+<h2>흐름도</h2>
+
+<div class="flow">
+사용자
+↓
+VPN Client
+↓
+암호화 터널 생성
+↓
+VPN Gateway
+↓
+사내 네트워크
+</div>
+
+<br>
+
+<div class="flow">
+지사 Router
+↓
+IPSec VPN
+↓
+본사 Firewall
+↓
+내부 서버
+</div>
+
+</div>
+
+<div class="card">
+<h2>예시</h2>
+
+<div class="flow">
+재택근무
+
+↓
+
+SSL VPN 접속
+
+↓
+
+사내 ERP 서버 접속
+
+↓
+
+암호화된 통신 유지
+</div>
+
+</div>
+
+<div class="card">
+<h2>실무에서 사용하는 경우</h2>
+
+<ul>
+<li>재택근무 사용자의 내부 시스템 접속을 지원한다.</li>
+<li>본사와 지사를 인터넷을 통해 안전하게 연결한다.</li>
+<li>VPN 연결 실패 시 인증 정보, 터널 상태, 방화벽 정책을 확인한다.</li>
+<li>관리자는 VPN 접속 로그를 확인하여 비정상 접속 여부를 점검한다.</li>
+</ul>
+
+</div>
+
+<div class="card">
+<h2>알아두면 좋은 내용</h2>
+
+<div class="tip">
+<ul>
+<li>VPN은 암호화 통신을 제공하지만 사용자 인증도 함께 중요하다.</li>
+<li>다중 인증(MFA)을 함께 사용하는 경우가 많다.</li>
+<li>SSL VPN은 원격 사용자, IPSec VPN은 네트워크 간 연결에 많이 사용된다.</li>
+<li>VPN Gateway는 방화벽 장비에서 함께 제공되는 경우도 많다.</li>
+</ul>
+</div>
+
+</div>
+
+<div class="card">
+<h2>핵심 요약</h2>
+
+<div class="tip">
+<ul>
+<li>VPN은 공용 네트워크에서 안전한 통신을 제공하는 기술이다.</li>
+<li>대표적으로 IPSec VPN과 SSL VPN이 있다.</li>
+<li>원격 근무와 지사 연결 환경에서 많이 사용된다.</li>
+<li>데이터를 암호화하여 기밀성을 높인다.</li>
+<li>기업 인프라 보안에서 자주 사용하는 핵심 기술이다.</li>
+</ul>
+</div>
+
+</div>
+
+</div>
+</body>
+</html>

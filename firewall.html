@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>12. Firewall</title>
+<style>
+body{margin:0;background:#F8FFF9;font-family:'Segoe UI',sans-serif;color:#333;line-height:1.8}
+.wrap{max-width:980px;margin:40px auto;padding:0 20px}
+.card{background:#fff;border-radius:18px;padding:34px;margin-bottom:24px;box-shadow:0 8px 24px rgba(0,0,0,.08)}
+h1{margin:0;color:#F08CB4;border-left:8px solid #BFEFD0;padding-left:14px}
+h2{color:#59A87B}
+.note{background:#FFF5F8;border-left:6px solid #F3ABC7;padding:16px;border-radius:10px}
+table{width:100%;border-collapse:collapse}
+th,td{border:1px solid #DCE9E0;padding:10px}
+th{background:#DFF8E8}
+.flow{background:#F5FFF7;border:1px dashed #8AC7A9;border-radius:10px;padding:16px;white-space:pre-line}
+.tip{background:#EEFDF3;border-radius:10px;padding:16px}
+code{background:#f3f3f3;padding:2px 5px;border-radius:4px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="card">
+<h1>12. Firewall</h1>
+<div class="note">
+Firewall은 미리 정의한 보안 정책에 따라 네트워크 트래픽을 허용하거나 차단하는 보안 장비이다.
+출발지와 목적지 IP, Port, Protocol 등을 확인하여 통신을 제어하며 기업 네트워크에서 가장 기본적인 보안 장비로 사용된다.
+</div>
+</div>
+
+<div class="card">
+<h2>왜 중요한가?</h2>
+<ul>
+<li>허가되지 않은 접근을 차단할 수 있다.</li>
+<li>내부 자산을 외부 공격으로부터 보호한다.</li>
+<li>서비스별 접근 정책을 세밀하게 관리할 수 있다.</li>
+<li>인프라 보안에서 가장 많이 다루는 장비 중 하나이다.</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>핵심 이론</h2>
+
+<table>
+<tr><th>용어</th><th>설명</th></tr>
+<tr><td>Policy</td><td>허용 또는 차단 기준이 되는 규칙</td></tr>
+<tr><td>ACL</td><td>접근 제어 목록</td></tr>
+<tr><td>Stateful</td><td>세션 정보를 기억하여 통신을 검사</td></tr>
+<tr><td>Stateless</td><td>패킷 단위로 검사하며 세션을 저장하지 않음</td></tr>
+<tr><td>Session</td><td>허용된 통신 정보를 일정 시간 유지</td></tr>
+</table>
+
+<br>
+
+<table>
+<tr><th>구분</th><th>Stateful</th><th>Stateless</th></tr>
+<tr><td>세션 관리</td><td>지원</td><td>미지원</td></tr>
+<tr><td>보안성</td><td>높음</td><td>상대적으로 낮음</td></tr>
+<tr><td>현재 사용</td><td>대부분의 방화벽</td><td>일부 환경</td></tr>
+</table>
+
+<p>
+방화벽은 일반적으로 출발지 IP, 목적지 IP, Port, Protocol을 기준으로 정책을 적용한다.
+기업 환경에서는 Stateful Firewall을 가장 많이 사용한다.
+</p>
+</div>
+
+<div class="card">
+<h2>흐름도</h2>
+
+<div class="flow">
+Client
+↓
+Firewall
+↓
+Policy 확인
+↓
+허용
+↓
+Web Server
+</div>
+
+<br>
+
+<div class="flow">
+패킷 수신
+↓
+IP / Port 확인
+↓
+Session 확인
+↓
+허용 또는 차단
+</div>
+
+</div>
+
+<div class="card">
+<h2>예시</h2>
+
+<div class="flow">
+Allow
+
+Source : Any
+Destination : Web Server
+TCP 443
+
+↓
+
+HTTPS 접속 허용
+</div>
+
+</div>
+
+<div class="card">
+<h2>실무에서 사용하는 경우</h2>
+
+<ul>
+<li>서비스 오픈 시 필요한 Port만 허용하는 정책을 추가한다.</li>
+<li>접속이 되지 않으면 방화벽 로그와 정책을 먼저 확인한다.</li>
+<li>특정 IP를 차단하거나 허용하는 정책을 관리한다.</li>
+<li>Session 정보를 확인하여 비정상적인 연결 여부를 분석한다.</li>
+</ul>
+
+</div>
+
+<div class="card">
+<h2>알아두면 좋은 내용</h2>
+
+<div class="tip">
+<ul>
+<li>기본 정책은 필요한 통신만 허용하고 나머지는 차단하는 방식이 권장된다.</li>
+<li>방화벽은 NAT 기능을 함께 제공하는 경우가 많다.</li>
+<li>L3/L4 정보뿐 아니라 L7(Application)까지 검사하는 차세대 방화벽(NGFW)도 많이 사용된다.</li>
+<li>허용 정책보다 정책의 순서가 결과에 영향을 주는 경우가 있다.</li>
+</ul>
+</div>
+
+</div>
+
+<div class="card">
+<h2>핵심 요약</h2>
+
+<div class="tip">
+<ul>
+<li>Firewall은 네트워크 트래픽을 허용하거나 차단하는 보안 장비이다.</li>
+<li>IP, Port, Protocol을 기준으로 정책을 적용한다.</li>
+<li>Stateful Firewall이 가장 일반적으로 사용된다.</li>
+<li>기업 네트워크 보안의 핵심 장비이다.</li>
+<li>방화벽 정책과 로그를 읽을 수 있어야 인프라 보안 업무를 수행하기 쉽다.</li>
+</ul>
+</div>
+
+</div>
+
+</div>
+</body>
+</html>

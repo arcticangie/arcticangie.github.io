@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>08. TCP</title>
+<style>
+body{margin:0;background:#F8FFF9;font-family:'Segoe UI',sans-serif;color:#333;line-height:1.8}
+.wrap{max-width:980px;margin:40px auto;padding:0 20px}
+.card{background:#fff;border-radius:18px;padding:34px;margin-bottom:24px;box-shadow:0 8px 24px rgba(0,0,0,.08)}
+h1{margin:0;color:#F08CB4;border-left:8px solid #BFEFD0;padding-left:14px}
+h2{color:#59A87B}
+.note{background:#FFF5F8;border-left:6px solid #F3ABC7;padding:16px;border-radius:10px}
+table{width:100%;border-collapse:collapse}
+th,td{border:1px solid #DCE9E0;padding:10px}
+th{background:#DFF8E8}
+.flow{background:#F5FFF7;border:1px dashed #8AC7A9;border-radius:10px;padding:16px;white-space:pre-line}
+.tip{background:#EEFDF3;border-radius:10px;padding:16px}
+code{background:#f3f3f3;padding:2px 5px;border-radius:4px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="card">
+<h1>08. TCP (Transmission Control Protocol)</h1>
+<div class="note">
+TCP는 신뢰성 있는 데이터 전송을 제공하는 전송 계층(Transport Layer) 프로토콜이다.
+데이터가 순서대로 전달되는지 확인하고, 손실된 데이터는 다시 전송하기 때문에 웹 서비스, SSH, 데이터베이스처럼 정확한 통신이 필요한 서비스에서 주로 사용된다.
+</div>
+</div>
+
+<div class="card">
+<h2>왜 중요한가?</h2>
+<ul>
+<li>웹 서비스와 대부분의 기업 시스템이 TCP를 사용한다.</li>
+<li>패킷 손실 시 재전송을 수행하여 데이터의 신뢰성을 보장한다.</li>
+<li>Wireshark 분석에서 가장 자주 확인하는 프로토콜이다.</li>
+<li>네트워크 장애 분석 시 TCP 연결 상태를 먼저 확인하는 경우가 많다.</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>핵심 이론</h2>
+
+<table>
+<tr><th>항목</th><th>설명</th></tr>
+<tr><td>Connection-Oriented</td><td>연결을 먼저 생성한 후 데이터를 전송한다.</td></tr>
+<tr><td>Reliability</td><td>데이터 손실 시 재전송한다.</td></tr>
+<tr><td>Sequence Number</td><td>패킷 순서를 관리한다.</td></tr>
+<tr><td>ACK</td><td>정상 수신 여부를 확인한다.</td></tr>
+<tr><td>Window Size</td><td>한 번에 전송 가능한 데이터 크기를 조절한다.</td></tr>
+</table>
+
+<br>
+
+<table>
+<tr><th>구분</th><th>TCP</th><th>UDP</th></tr>
+<tr><td>연결 방식</td><td>연결형</td><td>비연결형</td></tr>
+<tr><td>신뢰성</td><td>높음</td><td>낮음</td></tr>
+<tr><td>속도</td><td>상대적으로 느림</td><td>빠름</td></tr>
+<tr><td>대표 서비스</td><td>HTTP, HTTPS, SSH</td><td>DNS, VoIP, Streaming</td></tr>
+</table>
+
+<p>
+TCP는 통신을 시작하기 전에 3-Way Handshake를 수행하고, 연결을 종료할 때는 4-Way Handshake를 수행한다.
+또한 Flow Control과 재전송 기능을 통해 안정적인 데이터 전송을 보장한다.
+</p>
+
+</div>
+
+<div class="card">
+<h2>흐름도</h2>
+
+<div class="flow">
+3-Way Handshake
+
+Client
+↓ SYN
+Server
+↓ SYN + ACK
+Client
+↓ ACK
+연결 완료
+</div>
+
+<br>
+
+<div class="flow">
+4-Way Handshake
+
+FIN
+↓
+ACK
+↓
+FIN
+↓
+ACK
+연결 종료
+</div>
+
+</div>
+
+<div class="card">
+<h2>예시</h2>
+
+<div class="flow">
+브라우저에서 HTTPS 접속
+
+TCP 연결 생성
+↓
+TLS Handshake
+↓
+HTTP Request
+↓
+HTTP Response
+↓
+연결 종료
+</div>
+
+</div>
+
+<div class="card">
+<h2>실무에서 사용하는 경우</h2>
+
+<ul>
+<li>웹 서버 접속이 되지 않으면 먼저 TCP Handshake가 정상적으로 이루어지는지 확인한다.</li>
+<li>Wireshark에서 SYN, SYN/ACK, ACK 패킷을 확인하여 연결 실패 원인을 분석한다.</li>
+<li>방화벽이 TCP 443 또는 TCP 22 포트를 차단하고 있는지 확인한다.</li>
+<li>재전송(Retransmission)이 반복되면 네트워크 품질이나 장비 문제를 의심한다.</li>
+</ul>
+
+</div>
+
+<div class="card">
+<h2>알아두면 좋은 내용</h2>
+
+<div class="tip">
+<ul>
+<li>TCP는 데이터의 순서를 보장한다.</li>
+<li>ACK를 받지 못하면 동일한 데이터를 다시 전송한다.</li>
+<li>Window Size를 이용해 송수신 속도를 조절한다.</li>
+<li>HTTPS, SSH, RDP, SMB 등 대부분의 업무용 서비스는 TCP를 사용한다.</li>
+</ul>
+</div>
+
+</div>
+
+<div class="card">
+<h2>핵심 요약</h2>
+
+<div class="tip">
+<ul>
+<li>TCP는 신뢰성 있는 연결형 전송 프로토콜이다.</li>
+<li>3-Way Handshake로 연결을 생성하고 4-Way Handshake로 종료한다.</li>
+<li>Sequence Number와 ACK를 이용해 데이터 순서와 수신 여부를 관리한다.</li>
+<li>재전송과 Flow Control을 지원하여 안정적인 통신을 제공한다.</li>
+<li>기업 네트워크와 웹 서비스에서 가장 많이 사용하는 전송 프로토콜이다.</li>
+</ul>
+</div>
+
+</div>
+
+</div>
+</body>
+</html>

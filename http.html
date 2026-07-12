@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>14. HTTP & HTTPS</title>
+<style>
+body{margin:0;background:#F8FFF9;font-family:'Segoe UI',sans-serif;color:#333;line-height:1.8}
+.wrap{max-width:980px;margin:40px auto;padding:0 20px}
+.card{background:#fff;border-radius:18px;padding:34px;margin-bottom:24px;box-shadow:0 8px 24px rgba(0,0,0,.08)}
+h1{margin:0;color:#F08CB4;border-left:8px solid #BFEFD0;padding-left:14px}
+h2{color:#59A87B}
+.note{background:#FFF5F8;border-left:6px solid #F3ABC7;padding:16px;border-radius:10px}
+table{width:100%;border-collapse:collapse}
+th,td{border:1px solid #DCE9E0;padding:10px}
+th{background:#DFF8E8}
+.flow{background:#F5FFF7;border:1px dashed #8AC7A9;border-radius:10px;padding:16px;white-space:pre-line}
+.tip{background:#EEFDF3;border-radius:10px;padding:16px}
+code{background:#f3f3f3;padding:2px 5px;border-radius:4px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="card">
+<h1>14. HTTP & HTTPS</h1>
+<div class="note">
+HTTP는 웹 브라우저와 웹 서버가 데이터를 주고받기 위한 프로토콜이다.
+HTTPS는 HTTP에 TLS 암호화를 추가한 방식으로, 로그인 정보나 개인정보처럼 중요한 데이터를 안전하게 전송할 수 있다.
+현재 대부분의 웹 서비스는 HTTPS를 기본으로 사용한다.
+</div>
+</div>
+
+<div class="card">
+<h2>왜 중요한가?</h2>
+<ul>
+<li>웹 서비스의 기본 통신 방식을 이해할 수 있다.</li>
+<li>웹 보안과 패킷 분석의 기초가 된다.</li>
+<li>HTTP 요청과 응답 구조를 이해하면 로그 분석이 쉬워진다.</li>
+<li>기업 서비스는 대부분 HTTPS를 사용한다.</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>핵심 이론</h2>
+
+<table>
+<tr><th>구분</th><th>HTTP</th><th>HTTPS</th></tr>
+<tr><td>기본 Port</td><td>80</td><td>443</td></tr>
+<tr><td>암호화</td><td>미지원</td><td>TLS 사용</td></tr>
+<tr><td>보안성</td><td>낮음</td><td>높음</td></tr>
+<tr><td>사용 환경</td><td>일반 웹</td><td>로그인, 결제 등</td></tr>
+</table>
+
+<br>
+
+<table>
+<tr><th>Method</th><th>설명</th></tr>
+<tr><td>GET</td><td>데이터 조회</td></tr>
+<tr><td>POST</td><td>데이터 생성 및 전송</td></tr>
+<tr><td>PUT</td><td>데이터 수정</td></tr>
+<tr><td>DELETE</td><td>데이터 삭제</td></tr>
+</table>
+
+<p>
+HTTP 통신은 Request와 Response 구조로 이루어진다.
+요청에는 Method, Header, Body가 포함될 수 있으며 서버는 Status Code와 데이터를 응답한다.
+</p>
+</div>
+
+<div class="card">
+<h2>흐름도</h2>
+
+<div class="flow">
+Browser
+↓
+HTTPS 요청
+↓
+TLS 연결
+↓
+Web Server
+↓
+Response
+</div>
+
+<br>
+
+<div class="flow">
+Client
+↓
+HTTP Request
+↓
+Server
+↓
+HTTP Response
+</div>
+
+</div>
+
+<div class="card">
+<h2>예시</h2>
+
+<div class="flow">
+GET /index.html
+
+↓
+
+Status Code : 200 OK
+
+↓
+
+웹 페이지 표시
+</div>
+
+</div>
+
+<div class="card">
+<h2>실무에서 사용하는 경우</h2>
+
+<ul>
+<li>웹 서버 장애 시 HTTP Status Code를 확인한다.</li>
+<li>브라우저 개발자 도구와 Wireshark로 Request/Response를 분석한다.</li>
+<li>HTTPS 인증서 오류가 발생하면 인증서와 TLS 설정을 점검한다.</li>
+<li>방화벽에서 TCP 80, TCP 443 허용 여부를 확인한다.</li>
+</ul>
+
+</div>
+
+<div class="card">
+<h2>알아두면 좋은 내용</h2>
+
+<div class="tip">
+<ul>
+<li>HTTPS는 HTTP보다 안전한 통신을 제공한다.</li>
+<li>대표적인 Status Code는 200, 301, 403, 404, 500이다.</li>
+<li>Cookie와 Session은 사용자 상태를 유지하기 위해 사용된다.</li>
+<li>HTTPS는 TLS 위에서 동작한다.</li>
+</ul>
+</div>
+
+</div>
+
+<div class="card">
+<h2>핵심 요약</h2>
+
+<div class="tip">
+<ul>
+<li>HTTP는 웹 통신 프로토콜이다.</li>
+<li>HTTPS는 TLS를 이용해 데이터를 암호화한다.</li>
+<li>GET, POST는 가장 많이 사용하는 HTTP Method이다.</li>
+<li>웹 분석에서는 Request, Response, Status Code를 자주 확인한다.</li>
+<li>현대 웹 서비스는 대부분 HTTPS를 기본으로 사용한다.</li>
+</ul>
+</div>
+
+</div>
+
+</div>
+</body>
+</html>

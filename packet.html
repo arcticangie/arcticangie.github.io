@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>16. Packet</title>
+<style>
+body{margin:0;background:#F8FFF9;font-family:'Segoe UI',sans-serif;color:#333;line-height:1.8}
+.wrap{max-width:980px;margin:40px auto;padding:0 20px}
+.card{background:#fff;border-radius:18px;padding:34px;margin-bottom:24px;box-shadow:0 8px 24px rgba(0,0,0,.08)}
+h1{margin:0;color:#F08CB4;border-left:8px solid #BFEFD0;padding-left:14px}
+h2{color:#59A87B}
+.note{background:#FFF5F8;border-left:6px solid #F3ABC7;padding:16px;border-radius:10px}
+table{width:100%;border-collapse:collapse}
+th,td{border:1px solid #DCE9E0;padding:10px}
+th{background:#DFF8E8}
+.flow{background:#F5FFF7;border:1px dashed #8AC7A9;border-radius:10px;padding:16px;white-space:pre-line}
+.tip{background:#EEFDF3;border-radius:10px;padding:16px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="card">
+<h1>16. Packet</h1>
+<div class="note">
+Packet은 네트워크를 통해 전달되는 데이터 단위이다.
+사용자가 전송하는 데이터는 여러 개의 Packet으로 분할되어 전송되며, 각 Packet에는 목적지까지 전달하기 위한 다양한 Header 정보가 포함된다.
+패킷 구조를 이해하면 네트워크 흐름과 보안 로그를 분석하기 쉬워진다.
+</div>
+</div>
+
+<div class="card">
+<h2>왜 중요한가?</h2>
+<ul>
+<li>네트워크 통신이 이루어지는 기본 단위를 이해할 수 있다.</li>
+<li>Wireshark와 같은 패킷 분석 도구를 사용할 때 필수 개념이다.</li>
+<li>네트워크 장애와 보안 이벤트 분석의 기본이 된다.</li>
+<li>Header 정보를 통해 통신 과정을 추적할 수 있다.</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>핵심 이론</h2>
+
+<table>
+<tr><th>구성 요소</th><th>설명</th></tr>
+<tr><td>Ethernet Header</td><td>출발지/목적지 MAC 주소 정보</td></tr>
+<tr><td>IP Header</td><td>출발지/목적지 IP 주소 정보</td></tr>
+<tr><td>TCP/UDP Header</td><td>Port, Sequence 등 전송 정보</td></tr>
+<tr><td>Payload</td><td>실제 전송되는 데이터</td></tr>
+</table>
+
+<br>
+
+<table>
+<tr><th>계층</th><th>데이터 단위(PDU)</th></tr>
+<tr><td>Transport</td><td>Segment(TCP) / Datagram(UDP)</td></tr>
+<tr><td>Network</td><td>Packet</td></tr>
+<tr><td>Data Link</td><td>Frame</td></tr>
+<tr><td>Physical</td><td>Bit</td></tr>
+</table>
+
+<p>
+송신 측에서는 Header를 추가하며 데이터를 전송하고, 수신 측에서는 Header를 제거하면서 원래 데이터를 복원한다.
+</p>
+
+</div>
+
+<div class="card">
+<h2>흐름도</h2>
+
+<div class="flow">
+Application Data
+↓
+TCP Header
+↓
+IP Header
+↓
+Ethernet Header
+↓
+Packet 전송
+</div>
+
+<br>
+
+<div class="flow">
+Packet 수신
+↓
+Ethernet Header 제거
+↓
+IP Header 제거
+↓
+TCP Header 제거
+↓
+Application Data
+</div>
+
+</div>
+
+<div class="card">
+<h2>예시</h2>
+
+<div class="flow">
+브라우저에서 웹 페이지 요청
+
+↓
+
+HTTP 데이터 생성
+
+↓
+
+Packet 생성
+
+↓
+
+네트워크 전송
+
+↓
+
+서버 응답
+</div>
+
+</div>
+
+<div class="card">
+<h2>실무에서 사용하는 경우</h2>
+
+<ul>
+<li>Wireshark에서 Header 정보를 확인하여 통신 과정을 분석한다.</li>
+<li>IP 주소와 Port를 확인해 통신 상대를 식별한다.</li>
+<li>Packet 손실이나 재전송 여부를 확인해 장애 원인을 분석한다.</li>
+<li>보안 장비 로그와 Packet 정보를 함께 비교하여 이상 통신을 확인한다.</li>
+</ul>
+
+</div>
+
+<div class="card">
+<h2>알아두면 좋은 내용</h2>
+
+<div class="tip">
+<ul>
+<li>Packet에는 Header와 Payload가 포함된다.</li>
+<li>Header에는 통신에 필요한 다양한 정보가 저장된다.</li>
+<li>Packet 분석은 침해사고 대응에서도 자주 사용된다.</li>
+<li>캡슐화와 역캡슐화를 함께 이해하면 Packet 구조를 이해하기 쉽다.</li>
+</ul>
+</div>
+
+</div>
+
+<div class="card">
+<h2>핵심 요약</h2>
+
+<div class="tip">
+<ul>
+<li>Packet은 네트워크를 통해 전달되는 데이터 단위이다.</li>
+<li>Ethernet, IP, TCP/UDP Header와 Payload로 구성된다.</li>
+<li>패킷 구조를 이해하면 네트워크 분석이 쉬워진다.</li>
+<li>Wireshark와 보안 로그 분석의 핵심 개념이다.</li>
+<li>인프라 보안을 공부할 때 반드시 익혀야 하는 기본 내용이다.</li>
+</ul>
+</div>
+
+</div>
+
+</div>
+</body>
+</html>

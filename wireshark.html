@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>17. Wireshark</title>
+<style>
+body{margin:0;background:#F8FFF9;font-family:'Segoe UI',sans-serif;color:#333;line-height:1.8}
+.wrap{max-width:980px;margin:40px auto;padding:0 20px}
+.card{background:#fff;border-radius:18px;padding:34px;margin-bottom:24px;box-shadow:0 8px 24px rgba(0,0,0,.08)}
+h1{margin:0;color:#F08CB4;border-left:8px solid #BFEFD0;padding-left:14px}
+h2{color:#59A87B}
+.note{background:#FFF5F8;border-left:6px solid #F3ABC7;padding:16px;border-radius:10px}
+table{width:100%;border-collapse:collapse}
+th,td{border:1px solid #DCE9E0;padding:10px}
+th{background:#DFF8E8}
+.flow{background:#F5FFF7;border:1px dashed #8AC7A9;border-radius:10px;padding:16px;white-space:pre-line}
+.tip{background:#EEFDF3;border-radius:10px;padding:16px}
+code{background:#f3f3f3;padding:2px 5px;border-radius:4px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="card">
+<h1>17. Wireshark</h1>
+<div class="note">
+Wireshark는 네트워크를 통해 오가는 Packet을 캡처하고 분석하는 대표적인 네트워크 분석 도구이다.
+Packet의 Header와 Payload를 확인할 수 있어 네트워크 장애 분석과 보안 사고 대응에서 가장 많이 사용하는 프로그램 중 하나이다.
+</div>
+</div>
+
+<div class="card">
+<h2>왜 중요한가?</h2>
+<ul>
+<li>실제 네트워크 통신 과정을 눈으로 확인할 수 있다.</li>
+<li>TCP, DNS, HTTP, TLS 등 다양한 프로토콜을 분석할 수 있다.</li>
+<li>통신 장애 원인과 비정상 트래픽을 확인하는 데 도움이 된다.</li>
+<li>보안 관제와 침해사고 대응에서도 자주 사용된다.</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>핵심 이론</h2>
+
+<table>
+<tr><th>기능</th><th>설명</th></tr>
+<tr><td>Packet Capture</td><td>실시간 네트워크 트래픽 수집</td></tr>
+<tr><td>Protocol Analysis</td><td>프로토콜별 Header 분석</td></tr>
+<tr><td>Display Filter</td><td>원하는 Packet만 조회</td></tr>
+<tr><td>Follow Stream</td><td>하나의 통신 흐름 확인</td></tr>
+</table>
+
+<br>
+
+<table>
+<tr><th>자주 사용하는 Filter</th><th>설명</th></tr>
+<tr><td>ip.addr == 192.168.0.10</td><td>특정 IP 조회</td></tr>
+<tr><td>tcp.port == 443</td><td>HTTPS 통신 조회</td></tr>
+<tr><td>dns</td><td>DNS Packet 조회</td></tr>
+<tr><td>http</td><td>HTTP Packet 조회</td></tr>
+<tr><td>icmp</td><td>Ping 통신 조회</td></tr>
+</table>
+
+<p>Packet을 시간 순서대로 확인하면 통신이 정상적으로 이루어졌는지 쉽게 파악할 수 있다.</p>
+</div>
+
+<div class="card">
+<h2>흐름도</h2>
+
+<div class="flow">
+Packet Capture
+↓
+Filter 적용
+↓
+Header 확인
+↓
+통신 흐름 분석
+</div>
+
+<br>
+
+<div class="flow">
+SYN
+↓
+SYN/ACK
+↓
+ACK
+↓
+HTTP Request
+↓
+HTTP Response
+</div>
+
+</div>
+
+<div class="card">
+<h2>예시</h2>
+
+<div class="flow">
+dns
+
+↓
+
+example.com 조회
+
+↓
+
+A Record 응답
+
+↓
+
+TCP 연결 시작
+</div>
+
+</div>
+
+<div class="card">
+<h2>실무에서 사용하는 경우</h2>
+
+<ul>
+<li>웹 접속이 실패하면 TCP Handshake가 정상인지 확인한다.</li>
+<li>DNS 조회가 실패했는지 Packet으로 확인한다.</li>
+<li>재전송(Retransmission), Reset(RST), Time Out 여부를 분석한다.</li>
+<li>의심스러운 외부 IP와의 통신이 있는지 Packet을 확인한다.</li>
+</ul>
+
+</div>
+
+<div class="card">
+<h2>알아두면 좋은 내용</h2>
+
+<div class="tip">
+<ul>
+<li>Display Filter와 Capture Filter는 서로 다르다.</li>
+<li>Packet 번호와 시간을 함께 보면 흐름을 이해하기 쉽다.</li>
+<li>TCP Stream 기능으로 하나의 연결만 추적할 수 있다.</li>
+<li>Packet 분석은 네트워크와 보안 분야 모두에서 자주 사용된다.</li>
+</ul>
+</div>
+
+</div>
+
+<div class="card">
+<h2>핵심 요약</h2>
+
+<div class="tip">
+<ul>
+<li>Wireshark는 대표적인 Packet 분석 도구이다.</li>
+<li>TCP, DNS, HTTP, TLS 등 다양한 프로토콜을 분석할 수 있다.</li>
+<li>Filter를 사용하면 원하는 Packet만 빠르게 찾을 수 있다.</li>
+<li>장애 분석과 보안 사고 대응에서 매우 자주 사용된다.</li>
+<li>네트워크 공부를 할 때 반드시 익혀두는 것이 좋다.</li>
+</ul>
+</div>
+
+</div>
+
+</div>
+</body>
+</html>

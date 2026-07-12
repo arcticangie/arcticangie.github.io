@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>10. Switch</title>
+<style>
+body{margin:0;background:#F8FFF9;font-family:'Segoe UI',sans-serif;color:#333;line-height:1.8}
+.wrap{max-width:980px;margin:40px auto;padding:0 20px}
+.card{background:#fff;border-radius:18px;padding:34px;margin-bottom:24px;box-shadow:0 8px 24px rgba(0,0,0,.08)}
+h1{margin:0;color:#F08CB4;border-left:8px solid #BFEFD0;padding-left:14px}
+h2{color:#59A87B}
+.note{background:#FFF5F8;border-left:6px solid #F3ABC7;padding:16px;border-radius:10px}
+table{width:100%;border-collapse:collapse}
+th,td{border:1px solid #DCE9E0;padding:10px}
+th{background:#DFF8E8}
+.flow{background:#F5FFF7;border:1px dashed #8AC7A9;border-radius:10px;padding:16px;white-space:pre-line}
+.tip{background:#EEFDF3;border-radius:10px;padding:16px}
+code{background:#f3f3f3;padding:2px 5px;border-radius:4px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="card">
+<h1>10. Switch</h1>
+<div class="note">
+Switch는 같은 네트워크(LAN) 안에 있는 장비들을 연결하는 L2(Network Data Link Layer) 장비이다.
+MAC Address를 기준으로 목적지를 찾아 패킷(Frame)을 전달하며, Hub처럼 모든 장비에 데이터를 보내지 않고 필요한 장비에게만 전달한다.
+</div>
+</div>
+
+<div class="card">
+<h2>왜 중요한가?</h2>
+<ul>
+<li>기업 내부 네트워크에서 가장 많이 사용하는 장비이다.</li>
+<li>MAC Address 기반 통신을 이해할 수 있다.</li>
+<li>VLAN 구성과 네트워크 분리의 기본 장비이다.</li>
+<li>네트워크 장애 분석 시 가장 먼저 확인하는 장비 중 하나이다.</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>핵심 이론</h2>
+
+<table>
+<tr><th>용어</th><th>설명</th></tr>
+<tr><td>MAC Address</td><td>랜카드(NIC)에 부여된 고유 주소</td></tr>
+<tr><td>MAC Address Table</td><td>MAC 주소와 연결된 포트를 저장하는 테이블</td></tr>
+<tr><td>Learning</td><td>출발지 MAC을 학습하여 테이블에 저장</td></tr>
+<tr><td>Forwarding</td><td>목적지 MAC을 확인해 해당 포트로 전달</td></tr>
+<tr><td>Flooding</td><td>목적지 MAC을 모르면 모든 포트로 전송</td></tr>
+</table>
+
+<br>
+
+<table>
+<tr><th>Hub</th><th>Switch</th></tr>
+<tr><td>모든 포트로 전송</td><td>목적지 포트만 전송</td></tr>
+<tr><td>충돌 발생 가능</td><td>충돌 감소</td></tr>
+<tr><td>MAC 학습 기능 없음</td><td>MAC Address Table 사용</td></tr>
+</table>
+
+<p>
+Switch는 처음에는 목적지를 모르기 때문에 Flooding을 수행하지만,
+통신이 반복되면 MAC Address Table을 학습하여 필요한 포트로만 데이터를 전달한다.
+</p>
+</div>
+
+<div class="card">
+<h2>흐름도</h2>
+
+<div class="flow">
+PC A
+↓
+Switch
+↓
+MAC Address Table 조회
+↓
+PC B로 Frame 전달
+</div>
+
+<br>
+
+<div class="flow">
+출발지 MAC 확인
+↓
+MAC Table 저장
+↓
+목적지 MAC 검색
+↓
+Forwarding 또는 Flooding
+</div>
+
+</div>
+
+<div class="card">
+<h2>예시</h2>
+
+<div class="flow">
+PC A → PC B
+
+A의 MAC 학습
+↓
+
+B의 MAC 존재
+
+↓
+
+B가 연결된 포트로만 전송
+</div>
+
+</div>
+
+<div class="card">
+<h2>실무에서 사용하는 경우</h2>
+
+<ul>
+<li>사내 PC 간 통신 문제 발생 시 Switch Port 상태를 확인한다.</li>
+<li>MAC Address Table을 조회하여 어떤 장비가 어느 포트에 연결되어 있는지 확인한다.</li>
+<li>VLAN을 구성해 부서별 네트워크를 분리한다.</li>
+<li>Loop 발생을 방지하기 위해 STP(Spanning Tree Protocol)를 함께 사용한다.</li>
+</ul>
+
+</div>
+
+<div class="card">
+<h2>알아두면 좋은 내용</h2>
+
+<div class="tip">
+<ul>
+<li>Switch는 기본적으로 OSI 2계층 장비이다.</li>
+<li>MAC Address를 기준으로 Frame을 전달한다.</li>
+<li>Flooding은 목적지 MAC을 모를 때만 발생한다.</li>
+<li>L3 Switch는 라우팅 기능도 함께 지원할 수 있다.</li>
+</ul>
+</div>
+
+</div>
+
+<div class="card">
+<h2>핵심 요약</h2>
+
+<div class="tip">
+<ul>
+<li>Switch는 같은 네트워크의 장비를 연결하는 L2 장비이다.</li>
+<li>MAC Address Table을 이용해 목적지 포트를 찾는다.</li>
+<li>Learning, Forwarding, Flooding 동작을 이해하는 것이 중요하다.</li>
+<li>기업 네트워크에서는 VLAN과 함께 가장 많이 사용하는 장비이다.</li>
+<li>네트워크 기초와 인프라 보안을 공부할 때 반드시 알아야 하는 장비이다.</li>
+</ul>
+</div>
+
+</div>
+
+</div>
+</body>
+</html>

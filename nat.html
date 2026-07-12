@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>07. NAT</title>
+<style>
+body{margin:0;background:#F8FFF9;font-family:'Segoe UI',sans-serif;color:#333;line-height:1.8}
+.wrap{max-width:980px;margin:40px auto;padding:0 20px}
+.card{background:#fff;border-radius:18px;padding:34px;margin-bottom:24px;box-shadow:0 8px 24px rgba(0,0,0,.08)}
+h1{margin:0;color:#F08CB4;border-left:8px solid #BFEFD0;padding-left:14px}
+h2{color:#59A87B}
+.note{background:#FFF5F8;border-left:6px solid #F3ABC7;padding:16px;border-radius:10px}
+table{width:100%;border-collapse:collapse}
+th,td{border:1px solid #DCE9E0;padding:10px}
+th{background:#DFF8E8}
+.flow{background:#F5FFF7;border:1px dashed #8AC7A9;border-radius:10px;padding:16px;white-space:pre-line}
+.tip{background:#EEFDF3;border-radius:10px;padding:16px}
+code{background:#f3f3f3;padding:2px 5px;border-radius:4px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="card">
+<h1>07. NAT (Network Address Translation)</h1>
+<div class="note">
+NAT는 사설 IP와 공인 IP를 서로 변환해 주는 기술이다.
+회사나 집에서는 대부분 사설 IP를 사용하지만 인터넷과 통신하려면 공인 IP가 필요하기 때문에,
+라우터나 방화벽이 NAT를 수행해 외부와 통신할 수 있도록 한다.
+IPv4 주소 부족 문제를 해결하기 위해 가장 널리 사용하는 기술 중 하나이다.
+</div>
+</div>
+
+<div class="card">
+<h2>왜 중요한가?</h2>
+<ul>
+<li>사설 IP를 사용하는 내부 장비도 인터넷에 접속할 수 있다.</li>
+<li>공인 IP를 효율적으로 사용할 수 있다.</li>
+<li>기업 방화벽과 라우터에서 거의 항상 사용된다.</li>
+<li>방화벽 로그를 분석할 때 변환 전후 IP를 함께 확인해야 한다.</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>핵심 이론</h2>
+
+<table>
+<tr><th>종류</th><th>설명</th></tr>
+<tr><td>Static NAT</td><td>사설 IP와 공인 IP를 1:1로 고정 매핑한다.</td></tr>
+<tr><td>Dynamic NAT</td><td>공인 IP 풀에서 사용 가능한 주소를 동적으로 할당한다.</td></tr>
+<tr><td>PAT(NAPT)</td><td>여러 사설 IP가 하나의 공인 IP를 포트 번호와 함께 공유한다.</td></tr>
+</table>
+
+<br>
+
+<table>
+<tr><th>항목</th><th>내용</th></tr>
+<tr><td>Inside Local</td><td>내부에서 사용하는 사설 IP</td></tr>
+<tr><td>Inside Global</td><td>NAT 후 외부에 보이는 공인 IP</td></tr>
+<tr><td>변환 위치</td><td>라우터, 방화벽, NAT Gateway</td></tr>
+<tr><td>주요 목적</td><td>IPv4 주소 절약 및 내부망 보호</td></tr>
+</table>
+
+<p>
+가정이나 회사에서 가장 많이 사용하는 방식은 PAT이다.
+여러 대의 PC가 하나의 공인 IP를 공유하면서도 포트 번호를 이용해 각각의 세션을 구분한다.
+</p>
+
+</div>
+
+<div class="card">
+<h2>흐름도</h2>
+
+<div class="flow">
+PC 1 (192.168.0.10)
+↓
+NAT
+↓
+203.0.113.10:50001
+↓
+Internet
+</div>
+
+<br>
+
+<div class="flow">
+PC 2 (192.168.0.20)
+↓
+NAT
+↓
+203.0.113.10:50002
+↓
+Internet
+</div>
+
+</div>
+
+<div class="card">
+<h2>예시</h2>
+
+<div class="flow">
+사설 IP
+192.168.10.15
+
+↓
+
+NAT 수행
+
+↓
+
+공인 IP
+203.0.113.100
+
+↓
+
+웹 서버 접속
+</div>
+
+</div>
+
+<div class="card">
+<h2>실무에서 사용하는 경우</h2>
+
+<ul>
+<li>인터넷은 되지만 특정 서비스만 접속되지 않는 경우 NAT 정책을 확인한다.</li>
+<li>방화벽 로그에서 변환 전 IP와 변환 후 IP를 함께 확인한다.</li>
+<li>AWS NAT Gateway를 이용해 Private Subnet의 서버가 인터넷으로 업데이트를 받도록 구성한다.</li>
+<li>내부 서버를 외부에 공개할 때는 Static NAT 또는 Port Forwarding을 사용한다.</li>
+</ul>
+
+</div>
+
+<div class="card">
+<h2>알아두면 좋은 내용</h2>
+
+<div class="tip">
+<ul>
+<li>NAT는 보안 기능이 아니라 주소 변환 기술이다.</li>
+<li>PAT는 NAT의 가장 일반적인 형태이며 하나의 공인 IP를 여러 장비가 공유한다.</li>
+<li>IPv6 환경에서는 주소 공간이 넓어 NAT 의존도가 낮아진다.</li>
+<li>클라우드 환경에서도 NAT Gateway는 자주 사용하는 서비스이다.</li>
+</ul>
+</div>
+
+</div>
+
+<div class="card">
+<h2>핵심 요약</h2>
+
+<div class="tip">
+<ul>
+<li>NAT는 사설 IP와 공인 IP를 변환하는 기술이다.</li>
+<li>IPv4 주소 부족 문제를 해결하기 위해 널리 사용된다.</li>
+<li>Static NAT, Dynamic NAT, PAT 세 가지 방식을 알아두면 된다.</li>
+<li>기업 환경에서는 대부분 PAT를 사용한다.</li>
+<li>라우터와 방화벽을 이해하려면 NAT 개념은 반드시 알아야 한다.</li>
+</ul>
+</div>
+
+</div>
+
+</div>
+</body>
+</html>

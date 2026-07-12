@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>11. Router</title>
+<style>
+body{margin:0;background:#F8FFF9;font-family:'Segoe UI',sans-serif;color:#333;line-height:1.8}
+.wrap{max-width:980px;margin:40px auto;padding:0 20px}
+.card{background:#fff;border-radius:18px;padding:34px;margin-bottom:24px;box-shadow:0 8px 24px rgba(0,0,0,.08)}
+h1{margin:0;color:#F08CB4;border-left:8px solid #BFEFD0;padding-left:14px}
+h2{color:#59A87B}
+.note{background:#FFF5F8;border-left:6px solid #F3ABC7;padding:16px;border-radius:10px}
+table{width:100%;border-collapse:collapse}
+th,td{border:1px solid #DCE9E0;padding:10px}
+th{background:#DFF8E8}
+.flow{background:#F5FFF7;border:1px dashed #8AC7A9;border-radius:10px;padding:16px;white-space:pre-line}
+.tip{background:#EEFDF3;border-radius:10px;padding:16px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="card">
+<h1>11. Router</h1>
+<div class="note">
+Router는 서로 다른 네트워크를 연결하는 L3(Network Layer) 장비이다.
+목적지 IP 주소를 확인한 뒤 Routing Table을 참고하여 가장 적절한 경로로 패킷을 전달한다.
+인터넷 통신은 대부분 Router를 거쳐 이루어진다.
+</div>
+</div>
+
+<div class="card">
+<h2>왜 중요한가?</h2>
+<ul>
+<li>서로 다른 네트워크 간 통신을 가능하게 한다.</li>
+<li>Routing 동작 원리를 이해할 수 있다.</li>
+<li>Gateway와 인터넷 연결 구조를 이해하는 기본 장비이다.</li>
+<li>기업 네트워크와 클라우드 환경에서 필수적으로 사용된다.</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>핵심 이론</h2>
+
+<table>
+<tr><th>용어</th><th>설명</th></tr>
+<tr><td>Routing</td><td>목적지까지의 최적 경로를 선택하는 과정</td></tr>
+<tr><td>Routing Table</td><td>목적지와 전달 경로를 저장하는 테이블</td></tr>
+<tr><td>Next Hop</td><td>다음으로 패킷을 전달할 장비</td></tr>
+<tr><td>Default Route</td><td>일치하는 경로가 없을 때 사용하는 기본 경로</td></tr>
+<tr><td>Gateway</td><td>다른 네트워크로 나가기 위한 출입구</td></tr>
+</table>
+
+<br>
+
+<table>
+<tr><th>Switch</th><th>Router</th></tr>
+<tr><td>L2 장비</td><td>L3 장비</td></tr>
+<tr><td>MAC 주소 기반</td><td>IP 주소 기반</td></tr>
+<tr><td>같은 네트워크 연결</td><td>다른 네트워크 연결</td></tr>
+</table>
+
+<p>
+Router는 패킷을 수신하면 목적지 IP를 확인하고 Routing Table과 비교하여 적절한 인터페이스로 전달한다.
+</p>
+
+</div>
+
+<div class="card">
+<h2>흐름도</h2>
+
+<div class="flow">
+PC
+↓
+Default Gateway
+↓
+Router
+↓
+Routing Table 조회
+↓
+Internet
+</div>
+
+<br>
+
+<div class="flow">
+목적지 IP 확인
+↓
+Routing Table 검색
+↓
+Next Hop 결정
+↓
+패킷 전달
+</div>
+
+</div>
+
+<div class="card">
+<h2>예시</h2>
+
+<div class="flow">
+192.168.10.20
+
+↓
+
+8.8.8.8 접속
+
+↓
+
+Router가 목적지 경로 선택
+
+↓
+
+Internet으로 전달
+</div>
+
+</div>
+
+<div class="card">
+<h2>실무에서 사용하는 경우</h2>
+
+<ul>
+<li>다른 네트워크와 통신이 되지 않으면 Routing Table을 확인한다.</li>
+<li>Default Gateway 설정 오류 여부를 점검한다.</li>
+<li>Traceroute로 패킷 이동 경로를 확인한다.</li>
+<li>Static Route 또는 Dynamic Route 설정을 관리한다.</li>
+</ul>
+
+</div>
+
+<div class="card">
+<h2>알아두면 좋은 내용</h2>
+
+<div class="tip">
+<ul>
+<li>Router는 OSI 3계층 장비이다.</li>
+<li>IP 주소를 기준으로 패킷을 전달한다.</li>
+<li>기업 환경에서는 Dynamic Routing을 사용하는 경우가 많다.</li>
+<li>라우터는 NAT, ACL 등의 기능도 함께 제공하는 경우가 많다.</li>
+</ul>
+</div>
+
+</div>
+
+<div class="card">
+<h2>핵심 요약</h2>
+
+<div class="tip">
+<ul>
+<li>Router는 서로 다른 네트워크를 연결하는 장비이다.</li>
+<li>Routing Table을 이용해 최적의 경로를 선택한다.</li>
+<li>Gateway와 Routing 개념을 함께 이해하는 것이 중요하다.</li>
+<li>IP 기반 통신의 핵심 장비이다.</li>
+<li>기업 인프라에서 반드시 사용되는 네트워크 장비이다.</li>
+</ul>
+</div>
+
+</div>
+
+</div>
+</body>
+</html>

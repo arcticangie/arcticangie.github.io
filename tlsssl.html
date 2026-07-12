@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>15. TLS & SSL</title>
+<style>
+body{margin:0;background:#F8FFF9;font-family:'Segoe UI',sans-serif;color:#333;line-height:1.8}
+.wrap{max-width:980px;margin:40px auto;padding:0 20px}
+.card{background:#fff;border-radius:18px;padding:34px;margin-bottom:24px;box-shadow:0 8px 24px rgba(0,0,0,.08)}
+h1{margin:0;color:#F08CB4;border-left:8px solid #BFEFD0;padding-left:14px}
+h2{color:#59A87B}
+.note{background:#FFF5F8;border-left:6px solid #F3ABC7;padding:16px;border-radius:10px}
+table{width:100%;border-collapse:collapse}
+th,td{border:1px solid #DCE9E0;padding:10px}
+th{background:#DFF8E8}
+.flow{background:#F5FFF7;border:1px dashed #8AC7A9;border-radius:10px;padding:16px;white-space:pre-line}
+.tip{background:#EEFDF3;border-radius:10px;padding:16px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="card">
+<h1>15. TLS & SSL</h1>
+<div class="note">
+TLS(Transport Layer Security)는 네트워크 통신을 암호화하기 위한 보안 프로토콜이다.
+SSL은 TLS의 이전 버전으로 현재는 대부분 TLS를 사용하지만, 관례적으로 SSL이라는 이름도 함께 사용한다.
+HTTPS 통신도 TLS를 이용해 데이터를 안전하게 보호한다.
+</div>
+</div>
+
+<div class="card">
+<h2>왜 중요한가?</h2>
+<ul>
+<li>웹 통신에서 개인정보와 인증 정보를 안전하게 보호한다.</li>
+<li>HTTPS 동작 원리를 이해하는 핵심 기술이다.</li>
+<li>인증서를 이용해 서버의 신뢰성을 확인할 수 있다.</li>
+<li>보안 장비와 웹 서버를 운영할 때 자주 다루는 기술이다.</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>핵심 이론</h2>
+
+<table>
+<tr><th>용어</th><th>설명</th></tr>
+<tr><td>TLS</td><td>현재 사용되는 암호화 통신 프로토콜</td></tr>
+<tr><td>SSL</td><td>TLS 이전 버전(현재는 사용 권장하지 않음)</td></tr>
+<tr><td>Certificate</td><td>서버의 신원을 증명하는 디지털 인증서</td></tr>
+<tr><td>CA</td><td>인증서를 발급하는 기관</td></tr>
+<tr><td>Handshake</td><td>암호화 통신을 시작하기 위한 초기 과정</td></tr>
+</table>
+
+<br>
+
+<table>
+<tr><th>암호화 방식</th><th>용도</th></tr>
+<tr><td>비대칭키 암호화</td><td>키 교환 및 인증</td></tr>
+<tr><td>대칭키 암호화</td><td>실제 데이터 암호화</td></tr>
+</table>
+
+<p>
+TLS는 Handshake 과정에서 인증서를 검증하고 안전하게 대칭키를 공유한 뒤,
+이후부터는 대칭키를 이용해 데이터를 암호화하여 전송한다.
+</p>
+
+</div>
+
+<div class="card">
+<h2>흐름도</h2>
+
+<div class="flow">
+ClientHello
+↓
+ServerHello
+↓
+Certificate 전달
+↓
+Key Exchange
+↓
+암호화 통신 시작
+</div>
+
+<br>
+
+<div class="flow">
+브라우저
+↓
+HTTPS 요청
+↓
+TLS Handshake
+↓
+암호화된 데이터 송수신
+</div>
+
+</div>
+
+<div class="card">
+<h2>예시</h2>
+
+<div class="flow">
+https://example.com 접속
+
+↓
+
+인증서 검증
+
+↓
+
+TLS 연결 완료
+
+↓
+
+암호화된 HTTP 통신
+</div>
+
+</div>
+
+<div class="card">
+<h2>실무에서 사용하는 경우</h2>
+
+<ul>
+<li>웹 서버 인증서 만료 여부를 확인한다.</li>
+<li>HTTPS 접속 오류가 발생하면 TLS 버전과 인증서를 점검한다.</li>
+<li>보안 장비에서 TLS Inspection 기능을 사용하는 경우가 있다.</li>
+<li>Wireshark로 TLS Handshake 과정을 분석할 수 있다.</li>
+</ul>
+
+</div>
+
+<div class="card">
+<h2>알아두면 좋은 내용</h2>
+
+<div class="tip">
+<ul>
+<li>SSL보다 TLS 사용이 권장된다.</li>
+<li>인증서가 만료되면 HTTPS 경고가 발생할 수 있다.</li>
+<li>HTTPS는 HTTP + TLS 조합이다.</li>
+<li>TLS는 기밀성, 무결성, 인증 기능을 제공한다.</li>
+</ul>
+</div>
+
+</div>
+
+<div class="card">
+<h2>핵심 요약</h2>
+
+<div class="tip">
+<ul>
+<li>TLS는 네트워크 통신을 암호화하는 보안 프로토콜이다.</li>
+<li>HTTPS는 TLS를 이용해 안전한 웹 통신을 제공한다.</li>
+<li>Handshake 과정에서 인증서 검증과 키 교환이 이루어진다.</li>
+<li>실제 데이터는 대칭키 방식으로 암호화된다.</li>
+<li>웹 보안과 인프라 보안을 이해하기 위한 핵심 기술이다.</li>
+</ul>
+</div>
+
+</div>
+
+</div>
+</body>
+</html>
